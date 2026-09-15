@@ -3,7 +3,17 @@ $stopwatch-height: 80vmin;
 $dots-color: #000;
 $central-circle-color: #f6a603;
 $minutes-hand-color: #0700ff;
-$seconds-name-color: #2c8000;
+$seconds-hand-color: #2c8000;
+
+@keyframes rotate {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
 
 .body {
   margin: 0;
@@ -13,66 +23,60 @@ $seconds-name-color: #2c8000;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 
   & .stopwatch {
     height: $stopwatch-height;
     width: $stopwatch-width;
     border: 1vmin dotted $dots-color;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 70px;
+    position: relative;
+    top: 70px;
 
     &::before {
       content: '';
-      height: 5vmin;
+      position: absolute;
+      top: 50%;
+      left: 50%;
       width: 5vmin;
+      height: 5vmin;
       background-color: $central-circle-color;
       border-radius: 50%;
-      position: sticky;
+      transform: translate(-50%, -50%);
       z-index: 1;
     }
 
     & .stopwatch__minutes {
-      content: '';
-      height: 3vmin;
-      width: 20vmin;
-      background-color: $minutes-hand-color;
+      height: 20vmin;
+      width: 3vmin;
       position: absolute;
       left: 50%;
-      transform-origin: center left;
-      animation: hand-minute-rotation 660s steps(60) infinite;
+      bottom: 50%;
+      transform-origin: 50% 100%;
+      transform: translateX(-50%);
+      background-color: $minutes-hand-color;
+      animation: rotate 3600s steps(60) infinite;
     }
 
     & .stopwatch__seconds {
-      content: '';
-      height: 1.5vmin;
-      width: 38vmin;
-      background-color: $seconds-name-color;
+      height: 38vmin;
+      width: 1.5vmin;
+      background-color: $seconds-hand-color;
       position: absolute;
-      right: 50%;
-      transform-origin: center right;
-      animation: hand-seconds-rotation 11s linear infinite;
+      left: 50%;
+      bottom: 50%;
+      transform-origin: 50% 100%;
+      transform: translateX(-50%);
+      animation: rotate 60s linear infinite;
+    }
+
+    &--speed-up {
+      .stopwatch__minutes {
+        animation: rotate 600s steps(60) infinite;
+      }
+
+      .stopwatch__seconds {
+        animation: rotate 10s linear infinite;
+      }
     }
   } /* End of StopWatch */
 } /* End of Body */
-
-@keyframes hand-seconds-rotation {
-  from {
-    transform: rotate(90deg);
-  }
-  to {
-    transform: rotate(450deg);
-  }
-}
-
-@keyframes hand-minute-rotation {
-  from {
-    transform: rotate(270deg);
-  }
-  to {
-    transform: rotate(630deg);
-  }
-}
