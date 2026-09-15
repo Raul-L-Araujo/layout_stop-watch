@@ -29,8 +29,9 @@ $seconds-hand-color: #2c8000;
     width: $stopwatch-width;
     border: 1vmin dotted $dots-color;
     border-radius: 50%;
-    position: relative;
-    top: 70px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 
     &::before {
       content: '';
@@ -70,12 +71,14 @@ $seconds-hand-color: #2c8000;
     }
 
     &--speed-up {
-      .stopwatch__minutes {
-        animation: rotate 600s steps(60) infinite;
-      }
+      .stopwatch {
+        &__minutes {
+          animation: rotate 600s steps(60) infinite;
+        }
 
-      .stopwatch__seconds {
-        animation: rotate 10s linear infinite;
+        &__seconds {
+          animation: rotate 10s linear infinite;
+        }
       }
     }
   } /* End of StopWatch */
