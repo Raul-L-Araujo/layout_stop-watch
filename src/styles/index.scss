@@ -5,7 +5,7 @@ $central-circle-color: #f6a603;
 $minutes-hand-color: #0700ff;
 $seconds-hand-color: #2c8000;
 
-@keyframes rotate {
+@keyframes rotation {
   from {
     transform: translateX(-50%) rotate(0deg);
   }
@@ -55,7 +55,7 @@ $seconds-hand-color: #2c8000;
       transform-origin: 50% 100%;
       transform: translateX(-50%);
       background-color: $minutes-hand-color;
-      animation: rotate 3600s steps(60) infinite;
+      animation: rotation 3600s steps(60) infinite;
     }
 
     & .stopwatch__seconds {
@@ -67,18 +67,16 @@ $seconds-hand-color: #2c8000;
       bottom: 50%;
       transform-origin: 50% 100%;
       transform: translateX(-50%);
-      animation: rotate 60s linear infinite;
+      animation: rotation 60s linear infinite;
     }
 
     &--speed-up {
-      .stopwatch {
-        &__minutes {
-          animation: rotate 600s steps(60) infinite;
-        }
+      .stopwatch__minutes {
+        animation: rotation 600s steps(60) infinite;
+      }
 
-        &__seconds {
-          animation: rotate 10s linear infinite;
-        }
+      .stopwatch__seconds {
+        animation: rotation 10s linear infinite;
       }
     }
   } /* End of StopWatch */
